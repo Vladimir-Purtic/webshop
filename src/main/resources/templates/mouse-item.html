@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>GoodGame</title>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script>
+        function check(){
+            var quantity = $("#quantity").val();
+
+            if(quantity < 1){
+                document.getElementById("order").style.visibility="hidden";
+                document.getElementById("stock").style.visibility="visible";
+            }
+        }
+    </script>
+    <style type="text/css">
+        body{
+            background-color: #f4f4f4;
+            color: black;
+            font-family:Arial, Helvetica, sans-serif;
+            font-size:16px;
+            line-height:1.6em;
+            margin:0;
+        }
+
+        h1{
+            text-align: center;
+        }
+
+        a:link, a:visited {
+            background-color: #8f8fff;
+            color: white;
+            margin-top: 10px;
+            padding: 15px 50px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        a:hover, a:active {
+            background-color: #8f8fff;
+        }
+
+        #main-footer{
+            text-align: center;
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+        }
+
+
+        table {
+            border-collapse:collapse;
+            border-bottom:1px solid gray;
+            font-family: Tahoma,Verdana,Segoe,sans-serif;
+            width:30%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        th {
+            border-bottom:1px solid gray;
+            background:none repeat scroll 0 0 #0775d3;
+            padding:7px;
+            color: #FFFFFF;
+        }
+
+        tr {
+            border-top:1px solid gray;
+            text-align:center;
+        }
+
+        .container{
+            width: 100%;
+            text-align: center;
+        }
+
+        #buy{
+            position: absolute;
+            width: 100%;
+            text-align: center;
+        }
+    </style>
+
+</head>
+<body onload="check()">
+<h1 id="name" th:text="${mouse.name}"></h1>
+<input type="hidden" id="quantity" th:value="${mouse.quantity}"/>
+<div class="container">
+<table id="table">
+    <thead>
+    <tr>
+        <th> Color </th>
+        <th> Connection </th>
+        <th> Sensor </th>
+        <th> Resolution </th>
+        <th> RGB </th>
+        <th> Mass </th>
+        <th> Price </th>
+    </tr>
+    </thead>
+    <tbody>
+        <td><span id="color" th:text="${mouse.color}"> </span></td>
+        <td><span id="connection" th:text="${mouse.connection}"> </span></td>
+        <td><span id="sensor" th:text="${mouse.sensor}"> </span></td>
+        <td><span id="resolution" th:text="${mouse.resolution}"> </span></td>
+        <td><span id="rgb" th:text="${mouse.RGB}"> </span></td>
+        <td><span id="mass" th:text="${mouse.mass}"> </span></td>
+        <td><span id="price" th:text="${mouse.price}"> </span></td>
+    </tbody>
+</table><div id="buy">
+<a id="order" th:href="@{purchase-form/{id}(id = ${mouse.id})}">Buy</a>
+<label id="stock" style="color: red; visibility: hidden">Not on stock</label>
+</div>
+</div>
+<footer id="main-footer">
+    <p>Copyright &copy; <script>document.write(new Date().getFullYear());</script>, Good-Game</p>
+</footer>
+</body>
+</html>
